@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {
+	useRef,
+	useState
+} from 'react';
 import {
 	Avatar,
 	Button,
@@ -11,6 +14,11 @@ import {
 	Container
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {useMutation} from '@apollo/react-hooks'
+import { withSnackbar } from 'notistack';
+
+import {createUserMutation} from '../schema'
+import Loader from '../components/Loader'
 
 const useStyles = makeStyles(theme => ({
 	'@global': {
@@ -39,13 +47,36 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = props => {
 	const classes = useStyles();
+	const firstName = useRef();
+	const lastName = useRef();
+	const contact = useRef();
+	const password = useRef();
+	const [addUser, { loading: mutationLoading, error: mutationError,  data}] = useMutation(createUserMutation);
+	const [creating, setcreating] = useState(false)
+	if (data)
+		if (!data.createUser.ok)
+			props.enqueueSnackbar('This phone number is already registered', { 
+				variant: 'error',
+				persist: false,
+				autoHideDuration: 3000
+			});
+	const register = e => {
+		e.preventDefault()
+		addUser({ variables: {
+			contact: contact.current.value,
+			password: password.current.value,
+			first_name: firstName.current.value,
+			last_name: lastName.current.value
+		}});
+		setcreating(mutationLoading)
+	}
 	return (
 	<Container component="main" maxWidth="xs">
 		<CssBaseline />
 		  	<div className={classes.paper}>
 			  	<Avatar className={classes.avatar}> <LockOutlinedIcon /> </Avatar>
 			<Typography component="h1" variant="h5"> Sign up </Typography>
-			<form className={classes.form}>
+			<form className={classes.form} onSubmit={register} method="POST">
 		  		<Grid container spacing={2}>
 					<Grid item xs={12} sm={6}>
 			  			<TextField
@@ -57,6 +88,7 @@ const SignUp = props => {
 						id="firstName"
 						label="First Name"
 						autoFocus
+						inputRef={firstName}
 					/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -68,6 +100,7 @@ const SignUp = props => {
 						label="Last Name"
 						name="lastName"
 						autoComplete="lname"
+						inputRef={lastName}
 					/>
 					</Grid>
 					<Grid item xs={12}>
@@ -79,6 +112,7 @@ const SignUp = props => {
 						label="Phone number"
 						name="contact"
 						autoComplete="phone"
+						inputRef={contact}
 					/>
 					</Grid>
 					<Grid item xs={12}>
@@ -91,6 +125,7 @@ const SignUp = props => {
 						type="password"
 						id="password"
 						autoComplete="current-password"
+						inputRef={password}
 					/>
 					</Grid>
 		  		</Grid>
@@ -100,7 +135,9 @@ const SignUp = props => {
 				variant="contained"
 				color="primary"
 				className={classes.submit}
+				disabled={creating}
 		  		> Sign Up
+				  {creating && <Loader style={{position: 'absolute', marginTop: 0, color: 'white'}}/> }
 		  		</Button>
 		  		<Grid container justify="flex-end">
 					<Grid item>
@@ -113,4 +150,4 @@ const SignUp = props => {
   	);
 }
 
-export default SignUp;
+export default withSnackbar(SignUp);
