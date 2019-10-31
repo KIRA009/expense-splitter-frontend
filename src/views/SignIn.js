@@ -17,7 +17,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useMutation} from '@apollo/react-hooks'
 import { withSnackbar } from 'notistack';
 
-import {createUserMutation} from '../schema'
+import {loginUserMutation} from '../schema'
 import Loader from '../components/Loader'
 
 const useStyles = makeStyles(theme => ({
@@ -45,28 +45,27 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const SignUp = props => {
+const SignIn = props => {
 	const classes = useStyles();
-	const firstName = useRef();
-	const lastName = useRef();
 	const contact = useRef();
 	const password = useRef();
-	const [addUser, { loading: mutationLoading,  data}] = useMutation(createUserMutation);
-	const [creating, setcreating] = useState(false)
-	if (data)
-		if (!data.createUser.ok)
-			props.enqueueSnackbar('This phone number is already registered', { 
+	const [loginUser, { loading: mutationLoading,  data}] = useMutation(loginUserMutation);
+	const [creating, setcreating] = useState(false);
+	if (data) {
+		if (!data.loginUser.loggedIn)
+			props.enqueueSnackbar('Phone or password is incorrect', { 
 				variant: 'error',
 				persist: false,
 				autoHideDuration: 3000
 			});
-	const register = e => {
+		else
+			window.localStorage.setItem('Token', data.loginUser.token)
+	}
+	const login = e => {
 		e.preventDefault()
-		addUser({ variables: {
+		loginUser({ variables: {
 			contact: contact.current.value,
 			password: password.current.value,
-			first_name: firstName.current.value,
-			last_name: lastName.current.value
 		}});
 		setcreating(mutationLoading)
 	}
@@ -75,41 +74,16 @@ const SignUp = props => {
 		<CssBaseline />
 		  	<div className={classes.paper}>
 			  	<Avatar className={classes.avatar}> <LockOutlinedIcon /> </Avatar>
-			<Typography component="h1" variant="h5"> Sign up </Typography>
-			<form className={classes.form} onSubmit={register} method="POST">
+			<Typography component="h1" variant="h5"> Sign in </Typography>
+			<form className={classes.form} onSubmit={login} method="POST">
 		  		<Grid container spacing={2}>
-					<Grid item xs={12} sm={6}>
-			  			<TextField
-						autoComplete="fname"
-						name="firstName"
-						variant="outlined"
-						required
-						fullWidth
-						id="firstName"
-						label="First Name"
-						autoFocus
-						inputRef={firstName}
-					/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-						variant="outlined"
-						required
-						fullWidth
-						id="lastName"
-						label="Last Name"
-						name="lastName"
-						autoComplete="lname"
-						inputRef={lastName}
-					/>
-					</Grid>
 					<Grid item xs={12}>
 						<TextField
 						variant="outlined"
 						required
 						fullWidth
-						id="contact"
 						label="Phone number"
+						id="contact"
 						name="contact"
 						autoComplete="phone"
 						inputRef={contact}
@@ -141,7 +115,7 @@ const SignUp = props => {
 		  		</Button>
 		  		<Grid container justify="flex-end">
 					<Grid item>
-			  			<Link href="/signin" variant="body2"> Already have an account? Sign in </Link>
+			  			<Link href="/signup" variant="body2"> Don't have an account? Sign up </Link>
 					</Grid>
 		  		</Grid>
 			</form>
@@ -150,4 +124,4 @@ const SignUp = props => {
   	);
 }
 
-export default withSnackbar(SignUp);
+export default withSnackbar(SignIn);

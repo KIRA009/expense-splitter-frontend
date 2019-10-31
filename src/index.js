@@ -7,16 +7,25 @@ import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks'
 import { SnackbarProvider } from 'notistack';
 
+
 const client = new ApolloClient({
-  uri: 'http://127.0.0.1:8000/api/',
+	request: (operation) => {
+		const Token = localStorage.getItem('Token')
+		operation.setContext({
+			headers: {
+				Token
+		  	}
+		})
+	},
+	uri: 'http://127.0.0.1:8000/api/',
 });
 
 ReactDOM.render((
-  <ApolloProvider client={client}>
-    <SnackbarProvider maxSnack={3}>
-      <App />
-    </SnackbarProvider>
-  </ApolloProvider>
+	<ApolloProvider client={client}>
+		<SnackbarProvider maxSnack={3}>
+			<App />
+		</SnackbarProvider>
+	</ApolloProvider>
 ), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
