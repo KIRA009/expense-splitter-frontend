@@ -1,15 +1,19 @@
 import SignUp from './views/SignUp'
 import SignIn from './views/SignIn'
 
-const urls = [
+export const loggedOutUrls = [
     {
         url: '/signup',
-        component: SignUp
+        component: SignUp,
+        name: 'Sign Up'
     },
     {
         url: '/signin',
-        component: SignIn
+        component: SignIn,
+        name: 'Sign In'
     }
 ]
 
-export default urls;
+export const loggedInUrls = []
+
+export const urls = loggedOutUrls.concat(loggedInUrls)

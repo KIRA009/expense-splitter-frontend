@@ -19,13 +19,9 @@ import { withSnackbar } from 'notistack';
 
 import {createUserMutation} from '../schema'
 import Loader from '../components/Loader'
+import {secColors, primColors} from '../colors'
 
 const useStyles = makeStyles(theme => ({
-	'@global': {
-		body: {
-		backgroundColor: theme.palette.common.white,
-		},
-	},
 	paper: {
 		marginTop: theme.spacing(8),
 		display: 'flex',
@@ -34,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
+		backgroundColor: secColors.main
 	},
 	form: {
 		width: '100%',
@@ -42,6 +38,13 @@ const useStyles = makeStyles(theme => ({
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
+		backgroundColor: primColors.main,
+		color: secColors.dark,
+		transition: '0.3s',
+		'&:hover': {
+			backgroundColor: secColors.main,
+			color: primColors.light,
+		}
 	},
 }));
 
@@ -74,7 +77,7 @@ const SignUp = props => {
 	<Container component="main" maxWidth="xs">
 		<CssBaseline />
 		  	<div className={classes.paper}>
-			  	<Avatar className={classes.avatar}> <LockOutlinedIcon /> </Avatar>
+			  	<Avatar className={classes.avatar}> <LockOutlinedIcon/> </Avatar>
 			<Typography component="h1" variant="h5"> Sign up </Typography>
 			<form className={classes.form} onSubmit={register} method="POST">
 		  		<Grid container spacing={2}>

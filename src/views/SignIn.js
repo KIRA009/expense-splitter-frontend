@@ -19,6 +19,7 @@ import { withSnackbar } from 'notistack';
 
 import {loginUserMutation} from '../schema'
 import Loader from '../components/Loader'
+import {primColors, secColors} from '../colors'
 
 const useStyles = makeStyles(theme => ({
 	'@global': {
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
+		backgroundColor: secColors.main
 	},
 	form: {
 		width: '100%',
@@ -42,6 +43,13 @@ const useStyles = makeStyles(theme => ({
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
+		backgroundColor: primColors.main,
+		color: secColors.dark,
+		transition: '0.3s',
+		'&:hover': {
+			backgroundColor: secColors.main,
+			color: primColors.light,
+		}
 	},
 }));
 
@@ -107,10 +115,9 @@ const SignIn = props => {
 				type="submit"
 				fullWidth
 				variant="contained"
-				color="primary"
 				className={classes.submit}
 				disabled={creating}
-		  		> Sign Up
+		  		> Sign In
 				  {creating && <Loader style={{position: 'absolute', marginTop: 0, color: 'white'}}/> }
 		  		</Button>
 		  		<Grid container justify="flex-end">
