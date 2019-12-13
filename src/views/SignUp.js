@@ -7,7 +7,6 @@ import {
 	Button,
 	CssBaseline,
 	TextField,
-	Link,
 	Grid,
 	Typography,
 	makeStyles,
@@ -15,7 +14,7 @@ import {
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useMutation} from '@apollo/react-hooks'
-import { withSnackbar } from 'notistack';
+import {NavLink} from 'react-router-dom'
 
 import {createUserMutation} from '../schema'
 import Loader from '../components/Loader'
@@ -144,7 +143,7 @@ const SignUp = props => {
 		  		</Button>
 		  		<Grid container justify="flex-end">
 					<Grid item>
-			  			<Link href="/signin" variant="body2"> Already have an account? Sign in </Link>
+			  			<NavLink to="/signin" variant="body2"> Already have an account? Sign in </NavLink>
 					</Grid>
 		  		</Grid>
 			</form>
@@ -153,4 +152,4 @@ const SignUp = props => {
   	);
 }
 
-export default withSnackbar(SignUp);
+export default SignUp;

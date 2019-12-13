@@ -7,7 +7,6 @@ import {
 	Button,
 	CssBaseline,
 	TextField,
-	Link,
 	Grid,
 	Typography,
 	makeStyles,
@@ -15,11 +14,12 @@ import {
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useMutation} from '@apollo/react-hooks'
-import { withSnackbar } from 'notistack';
+import {NavLink} from 'react-router-dom'
 
 import {loginUserMutation} from '../schema'
 import Loader from '../components/Loader'
 import {primColors, secColors} from '../colors'
+import {loggedInUrls} from '../urls'
 
 const useStyles = makeStyles(theme => ({
 	'@global': {
@@ -66,8 +66,10 @@ const SignIn = props => {
 				persist: false,
 				autoHideDuration: 3000
 			});
-		else
-			window.localStorage.setItem('Token', data.loginUser.token)
+		else {
+			window.localStorage.setItem('Token', data.loginUser.token);
+			window.location.href = loggedInUrls[0].url;
+		}
 	}
 	const login = e => {
 		e.preventDefault()
@@ -122,7 +124,7 @@ const SignIn = props => {
 		  		</Button>
 		  		<Grid container justify="flex-end">
 					<Grid item>
-			  			<Link href="/signup" variant="body2"> Don't have an account? Sign up </Link>
+						<NavLink to="/signup" variant="body2"> Don't have an account? Sign up </NavLink>
 					</Grid>
 		  		</Grid>
 			</form>
@@ -131,4 +133,4 @@ const SignIn = props => {
   	);
 }
 
-export default withSnackbar(SignIn);
+export default SignIn;
