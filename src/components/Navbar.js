@@ -7,10 +7,11 @@ import {
 } from '@material-ui/core';
 
 import {primColors, secColors} from '../colors'
+import Logo from './Logo'
 
 const useStyles = makeStyles(theme => ({
     tabs: {
-        minWidth: 90,
+        width: 'auto',
         margin: 10
     }
 }))
@@ -22,12 +23,7 @@ const Navbar = ({tabs}) => {
         <div style={{marginBottom: 50}}>
             <AppBar position='static' style={{backgroundColor:primColors.main}}>
                 <Toolbar>
-                    <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg" style={{padding:5}}>
-                        <rect width="60" height="60" style={{fill:secColors.main}}></rect>
-                        <text x="25" y="16" fill="#fff" style={{transform:'scale(1.5)', fontWeight:'700'}}>E</text>
-                        <polygon points="0,0 60,60 0,60" style={{fill:primColors.main}}></polygon>
-                        <text x="4" y="35" fill={secColors.main} style={{transform:'scale(1.5)', fontWeight:'700'}}>S</text>
-                    </svg>
+                    <Logo />
                     <div style={{marginLeft: 'auto', display: 'flex'}}>
                         {tabs.map((tab, index) => (
                             <Button
