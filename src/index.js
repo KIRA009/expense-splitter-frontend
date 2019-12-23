@@ -17,7 +17,7 @@ const client = new ApolloClient({
 		  	}
 		})
 	},
-	uri: 'http://127.0.0.1:8000/api/',
+	uri: process.env.REACT_APP_API_URL,
 });
 
 ReactDOM.render((

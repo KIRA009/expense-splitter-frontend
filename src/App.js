@@ -15,7 +15,6 @@ const App = () => {
 	if (loading)
 		return <Loader />
 	const loggedIn = (data.user !== null);
-	// console.log('Logged in: ', loggedIn)
 	return (
 		<>
 		<Navbar tabs={(loggedIn) ? (loggedInUrls) : (loggedOutUrls)}/>
