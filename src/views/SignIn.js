@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useMutation} from '@apollo/react-hooks'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 
 import {loginUserMutation} from '../schema'
 import Loader from '../components/Loader'
@@ -59,6 +59,8 @@ const SignIn = props => {
 	const password = useRef();
 	const [loginUser, { loading: mutationLoading,  data}] = useMutation(loginUserMutation);
 	const [creating, setcreating] = useState(false);
+	const history = useHistory();
+
 	if (data) {
 		if (!data.loginUser.loggedIn)
 			props.enqueueSnackbar('Phone or password is incorrect', { 
@@ -68,7 +70,7 @@ const SignIn = props => {
 			});
 		else {
 			window.localStorage.setItem('Token', data.loginUser.token);
-			window.location.href = loggedInUrls[0].url;
+			history.push(loggedInUrls[0].url);
 		}
 	}
 	const login = e => {
