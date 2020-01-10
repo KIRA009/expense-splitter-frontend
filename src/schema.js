@@ -1,7 +1,7 @@
 import {gql} from 'apollo-boost'
 
 export const getUserQuery = gql`
-query getUser {
+query user {
 	user {
 		contact
 	}
@@ -42,6 +42,65 @@ mutation login(
 	) {
 		token
 		loggedIn
+	}
+}
+`
+
+export const getReceivedFriendRequestsQuery = gql`
+query friendRequestsReceived {
+    friendRequestsReceived {
+	    fromUser {
+		    contact
+			firstName
+	    }
+    }
+}
+`
+
+export const getSentFriendRequestsQuery = gql`
+query friendRequestsSent {
+    friendRequestsSent {
+	    toUser {
+		    contact
+			firstName
+	    }
+    }
+}
+`
+
+export const acceptRequestMutation = gql`
+mutation acceptFriendRequest (
+	$contact: String!
+) {
+	acceptFriendRequest (
+		contactSender: $contact
+	) {
+		ok
+	}
+}
+`
+
+export const deleteRequestMutation = gql`
+mutation deleteFriendRequest (
+	$contact: String!
+) {
+	deleteFriendRequest (
+		otherUser: $contact
+	) {
+		ok
+	}
+}
+`
+
+export const sendRequestMutation = gql`
+mutation sendFriendRequest (
+	$contact: String!
+) {
+	sendFriendRequest (
+		contactReceiver: $contact
+	) {
+		ok
+		message
 	}
 }
 `
