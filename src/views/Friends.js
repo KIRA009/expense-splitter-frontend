@@ -5,7 +5,11 @@ import {useQuery} from '@apollo/react-hooks';
 import {FriendCard, Loader} from '../components';
 import {getFriendsQuery} from '../schema';
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles(theme => ({
+    emptyList: {
+        textAlign: 'center'
+    }
+}));
 
 export const Friends = () => {
     const classes = useStyles();

@@ -56,7 +56,7 @@ export const SignIn = props => {
             });
         else {
             window.localStorage.setItem('Token', data.loginUser.token);
-            window.location.href = '';
+            window.location.href = '/';
         }
     }
     const login = e => {
