@@ -10,6 +10,7 @@
     "axios": "^0.19.0",
     "graphql": "^14.5.8",
     "notistack": "^0.9.5",
+    "prettier": "^1.19.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-router": "^5.1.2",
@@ -17,10 +18,11 @@
     "react-scripts": "^3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run fmt & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fmt": "prettier --print-width 120 --jsx-bracket-same-line --no-bracket-spacing --single-quote --tab-width 4 --write \"src/**/*.js\""
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,12 +1,7 @@
-import React from 'react'
-import {
-    Paper,
-    Typography,
-    makeStyles,
-    Button
-} from '@material-ui/core'
+import React from 'react';
+import {Paper, Typography, makeStyles, Button} from '@material-ui/core';
 
-import {primColors, secColors} from '../colors'
+import {primColors, secColors} from '../colors';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -15,17 +10,16 @@ const useStyles = makeStyles(theme => ({
         marginRight: 'auto',
         padding: 20,
         display: 'flex',
-        marginBottom: 30,
+        marginBottom: 30
     },
     details: {
-        flex: 1,
+        flex: 1
     },
     actions: {
         flex: 1,
         textAlign: 'right'
     }
-}))
-
+}));
 
 export const FriendCard = props => {
     const classes = useStyles();
@@ -40,29 +34,36 @@ export const FriendCard = props => {
                     {contact}
                 </Typography>
             </div>
-            {(actions) ? (
-            <div className={classes.actions}>
-                {(actions.includes("accept")) ? (<><Button
-                className={classes.tabs}
-                type="submit"
-                variant="contained"
-                style={{backgroundColor: primColors.light, color: secColors.dark}}
-                onClick={() => others.acceptRequest({ variables: { contact } })}
-                    > Accept
-                </Button>
-                <br />
-                <br />
-                </>) : null}
-                {(actions.includes("delete")) ? (<Button
-                className={classes.tabs}
-                type="submit"
-                variant="contained"
-                style={{backgroundColor: secColors.dark, color: primColors.light}}
-                onClick={() => others.deleteRequest({ variables: { contact } })}
-                    > Delete
-                </Button>) : null}
-            </div>
+            {actions ? (
+                <div className={classes.actions}>
+                    {actions.includes('accept') ? (
+                        <>
+                            <Button
+                                className={classes.tabs}
+                                type="submit"
+                                variant="contained"
+                                style={{backgroundColor: primColors.light, color: secColors.dark}}
+                                onClick={() => others.acceptRequest({variables: {contact}})}>
+                                {' '}
+                                Accept
+                            </Button>
+                            <br />
+                            <br />
+                        </>
+                    ) : null}
+                    {actions.includes('delete') ? (
+                        <Button
+                            className={classes.tabs}
+                            type="submit"
+                            variant="contained"
+                            style={{backgroundColor: secColors.dark, color: primColors.light}}
+                            onClick={() => others.deleteRequest({variables: {contact}})}>
+                            {' '}
+                            Delete
+                        </Button>
+                    ) : null}
+                </div>
             ) : null}
         </Paper>
-    )
-}
+    );
+};
