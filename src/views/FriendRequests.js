@@ -99,13 +99,13 @@ export const FriendRequests = props => {
                     <Typography variant="h5" component="h3" align='center' gutterBottom>
                         Received Friend Requests
                     </Typography>
-                    {receivedRequests.loading ? (
+                    {receivedRequests.loading || receivedRequests.data.user == null ? (
                         <Loader />
                     ) : (
-                        (receivedRequests.data.friendRequestsReceived.length === 0) ? (
+                        (receivedRequests.data.user.userReceived.length === 0) ? (
                             <p className={classes.emptyList}>No requests received</p>
                          ) :
-                        receivedRequests.data.friendRequestsReceived.map((item, index) => (
+                         receivedRequests.data.user.userReceived.map((item, index) => (
                             <FriendCard
                                 key={index}
                                 name={item.fromUser.firstName}
@@ -122,13 +122,13 @@ export const FriendRequests = props => {
                     <Typography variant="h5" component="h3" align='center' gutterBottom>
                         Sent Friend Requests
                     </Typography>
-                    {sentRequests.loading ? (
+                    {sentRequests.loading || sentRequests.data.user == null ? (
                         <Loader />
                     ) : (
-                        (sentRequests.data.friendRequestsSent.length === 0) ? (
+                        (sentRequests.data.user.userSent.length === 0) ? (
                             <p className={classes.emptyList}>No requests sent</p>
                         ):
-                        sentRequests.data.friendRequestsSent.map((item, index) => (
+                        sentRequests.data.user.userSent.map((item, index) => (
                             <FriendCard
                                 key={index}
                                 name={item.toUser.firstName}

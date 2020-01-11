@@ -14,12 +14,11 @@ import {
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {useMutation} from '@apollo/react-hooks'
-import {NavLink, useHistory} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 import {loginUserMutation} from '../schema'
 import {Loader} from '../components'
 import {primColors, secColors} from '../colors'
-import {loggedInUrls} from '../urls'
 
 const useStyles = makeStyles(theme => ({
 	'@global': {
@@ -59,7 +58,6 @@ export const SignIn = props => {
 	const password = useRef();
 	const [loginUser, { loading: mutationLoading,  data}] = useMutation(loginUserMutation);
 	const [creating, setcreating] = useState(false);
-	const history = useHistory();
 
 	if (data) {
 		if (!data.loginUser.loggedIn)
@@ -70,7 +68,7 @@ export const SignIn = props => {
 			});
 		else {
 			window.localStorage.setItem('Token', data.loginUser.token);
-			history.push(loggedInUrls[0].url);
+			window.location.href = ''
 		}
 	}
 	const login = e => {

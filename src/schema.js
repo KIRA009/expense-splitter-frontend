@@ -47,24 +47,26 @@ mutation login(
 `
 
 export const getReceivedFriendRequestsQuery = gql`
-query friendRequestsReceived {
-    friendRequestsReceived {
-	    fromUser {
-		    contact
-			firstName
-	    }
-    }
+query user {
+	user {
+		userReceived {
+			fromUser {
+				contact
+			}
+		}
+	}
 }
 `
 
 export const getSentFriendRequestsQuery = gql`
-query friendRequestsSent {
-    friendRequestsSent {
-	    toUser {
-		    contact
-			firstName
-	    }
-    }
+query user {
+	user {
+		userSent {
+			toUser {
+				contact
+			}
+		}
+	}
 }
 `
 
@@ -101,6 +103,19 @@ mutation sendFriendRequest (
 	) {
 		ok
 		message
+	}
+}
+`
+
+export const getFriendsQuery = gql`
+query user {
+	user {
+		user {
+			friend {
+				contact
+				firstName
+			}
+		}
 	}
 }
 `

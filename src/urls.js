@@ -1,6 +1,6 @@
 import { withSnackbar } from 'notistack';
 
-import {SignIn, FriendRequests, SignUp} from './views'
+import {SignIn, FriendRequests, SignUp, Friends, Logout} from './views'
 import {Title} from './components'
 
 export const loggedOutUrls = [
@@ -24,6 +24,16 @@ export const loggedInUrls = [
         url: '/friend-requests',
         component: FriendRequests,
         name: 'Friend Requests'
+    },
+    {
+        url: '/friends',
+        component: Friends,
+        name: 'Friends'
+    },
+    {
+        url: '/log-out',
+        component: Logout,
+        name: 'Logout'
     }
 ].map(link => ({
     ...link,
