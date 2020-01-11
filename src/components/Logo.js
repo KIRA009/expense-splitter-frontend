@@ -2,7 +2,7 @@ import React from 'react'
 
 import {primColors, secColors} from '../colors'
 
-const Logo = () => {
+export const Logo = () => {
     return (
         <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg" style={{padding:5}}>
             <rect width="60" height="60" style={{fill:secColors.main}}></rect>
@@ -12,5 +12,3 @@ const Logo = () => {
         </svg>
     )
 }
-
-export default Logo;

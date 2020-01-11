@@ -17,7 +17,7 @@ import {useMutation} from '@apollo/react-hooks'
 import {NavLink, useHistory} from 'react-router-dom'
 
 import {loginUserMutation} from '../schema'
-import Loader from '../components/Loader'
+import {Loader} from '../components'
 import {primColors, secColors} from '../colors'
 import {loggedInUrls} from '../urls'
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const SignIn = props => {
+export const SignIn = props => {
 	const classes = useStyles();
 	const contact = useRef();
 	const password = useRef();
@@ -134,5 +134,3 @@ const SignIn = props => {
 	</Container>
   	);
 }
-
-export default SignIn;

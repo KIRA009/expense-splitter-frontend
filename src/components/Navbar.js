@@ -7,7 +7,7 @@ import {
 
 import {primColors, secColors} from '../colors'
 import {NavLink} from 'react-router-dom'
-import Logo from './Logo'
+import {Logo} from '.'
 
 const useStyles = makeStyles(theme => ({
     tab: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Navbar = ({tabs}) => {
+export const Navbar = ({tabs}) => {
     const classes = useStyles();
     return (
         <div style={{marginBottom: 50}}>
@@ -43,6 +43,3 @@ const Navbar = ({tabs}) => {
         </div>
     )
 }
-
-
-export default Navbar;

@@ -3,8 +3,7 @@ import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import {useQuery} from '@apollo/react-hooks'
 
 import {loggedInUrls, loggedOutUrls} from './urls'
-import Navbar from './components/Navbar'
-import Loader from './components/Loader'
+import {ServerError, Loader, Navbar} from './components'
 import {getUserQuery} from './schema'
 import {useStyles} from './styles'
 
@@ -12,6 +11,7 @@ const App = () => {
 	const {data, loading} = useQuery(getUserQuery);
 	useStyles();
 	if (loading) return <Loader />
+	if (!data) return <ServerError />
 	const isLoggedIn = () => (data.user !== null) || localStorage.getItem('Token') != null
 	return (
 		<>

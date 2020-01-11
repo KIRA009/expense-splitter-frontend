@@ -17,7 +17,7 @@ import {useMutation} from '@apollo/react-hooks'
 import {NavLink} from 'react-router-dom'
 
 import {createUserMutation} from '../schema'
-import Loader from '../components/Loader'
+import {Loader} from '../components'
 import {secColors, primColors} from '../colors'
 
 const useStyles = makeStyles(theme => ({
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const SignUp = props => {
+export const SignUp = props => {
 	const classes = useStyles();
 	const firstName = useRef();
 	const lastName = useRef();
@@ -151,5 +151,3 @@ const SignUp = props => {
 	</Container>
   	);
 }
-
-export default SignUp;

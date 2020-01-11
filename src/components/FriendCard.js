@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const FriendCard = props => {
+export const FriendCard = props => {
     const classes = useStyles();
     const {name, actions, contact, ...others} = props;
     return (
@@ -65,6 +65,3 @@ const FriendCard = props => {
         </Paper>
     )
 }
-
-
-export default FriendCard;

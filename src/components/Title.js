@@ -1,7 +1,4 @@
-const Title = (comp, name) => {
+export const Title = (comp, name) => {
     document.title = `Expense Splitter - ${name}`
     return comp;
 }
-
-
-export default Title;

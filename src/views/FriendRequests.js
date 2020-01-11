@@ -9,8 +9,7 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import {useQuery, useMutation} from '@apollo/react-hooks'
 
-import FriendCard from '../components/FriendCard'
-import Loader from '../components/Loader'
+import {FriendCard, Loader} from '../components'
 import {
     getReceivedFriendRequestsQuery,
     getSentFriendRequestsQuery,
@@ -22,6 +21,7 @@ import {
 const useStyles = makeStyles(theme => ({
     searchFieldContainer: {
         textAlign: 'center',
+        marginBottom: 50,
     },
     searchField: {
         width: 220
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
- const FriendRequests = props => {
+export const FriendRequests = props => {
     const classes = useStyles();
     const contact = useRef();
     const receivedRequests = useQuery(getReceivedFriendRequestsQuery);
@@ -142,5 +142,3 @@ const useStyles = makeStyles(theme => ({
         </Grid>
     )
 }
-
-export default FriendRequests;

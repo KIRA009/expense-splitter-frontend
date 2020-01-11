@@ -3,7 +3,7 @@ import {
     CircularProgress,
 } from '@material-ui/core';
 
-const Loader = props => (
+export const Loader = props => (
     <CircularProgress style={{
         display: 'block',
         margin: 'auto',
@@ -11,5 +11,3 @@ const Loader = props => (
         ...props.style
     }}/>
 )
-
-export default Loader;

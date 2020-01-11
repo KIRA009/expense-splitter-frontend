@@ -1,9 +1,7 @@
 import { withSnackbar } from 'notistack';
 
-import SignUp from './views/SignUp'
-import SignIn from './views/SignIn'
-import FriendRequests from './views/FriendRequests'
-import Title from './components/Title'
+import {SignIn, FriendRequests, SignUp} from './views'
+import {Title} from './components'
 
 export const loggedOutUrls = [
     {
