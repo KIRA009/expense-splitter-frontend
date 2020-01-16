@@ -1,7 +1,6 @@
 import {withSnackbar} from 'notistack';
 
-import {SignIn, FriendRequests, SignUp, Friends, Logout} from './views';
-import {Title} from './components';
+import {SignIn, FriendRequests, SignUp, Friends, Logout, Groups} from './views';
 
 export const loggedOutUrls = [
     {
@@ -16,7 +15,7 @@ export const loggedOutUrls = [
     }
 ].map(link => ({
     ...link,
-    component: withSnackbar(Title(link.component, link.name))
+    component: withSnackbar(link.component, link.name)
 }));
 
 export const loggedInUrls = [
@@ -31,16 +30,16 @@ export const loggedInUrls = [
         name: 'Friends'
     },
     {
+        url: '/groups',
+        component: Groups,
+        name: 'Groups'
+    },
+    {
         url: '/log-out',
         component: Logout,
         name: 'Logout'
     }
 ].map(link => ({
     ...link,
-    component: withSnackbar(Title(link.component, link.name))
+    component: withSnackbar(link.component, link.name)
 }));
-
-// export const urls = loggedOutUrls.concat(loggedInUrls).map(link => ({
-//     ...link,
-//     component: withSnackbar(link.component)
-// }))

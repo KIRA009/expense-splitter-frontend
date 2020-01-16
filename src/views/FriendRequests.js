@@ -110,8 +110,8 @@ export const FriendRequests = props => {
                                 key={index}
                                 name={item.fromUser.firstName}
                                 contact={item.fromUser.contact}
-                                acceptRequest={acceptRequest}
-                                deleteRequest={deleteRequest}
+                                accept={acceptRequest}
+                                delete={deleteRequest}
                                 actions={['accept', 'delete']}
                             />
                         ))
@@ -133,7 +133,7 @@ export const FriendRequests = props => {
                                 key={index}
                                 name={item.toUser.firstName}
                                 contact={item.toUser.contact}
-                                deleteRequest={deleteRequest}
+                                delete={deleteRequest}
                                 actions={['delete']}
                             />
                         ))

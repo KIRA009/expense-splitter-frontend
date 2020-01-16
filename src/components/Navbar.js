@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
     AppBar,
     CssBaseline,
-    Divider,
     Drawer,
     Hidden,
     List,
@@ -78,13 +77,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Navbar = props => {
-    const {tabs} = props;
+    const {tabs, value, setValue} = props;
     const classes = useStyles();
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [value, setValue] = useState(0);
 
     const handleDrawerToggle = () => {
+        if (window.innerWidth > 500) return;
         setMobileOpen(!mobileOpen);
+        console.log(mobileOpen);
     };
 
     const drawer = (
@@ -92,7 +92,6 @@ export const Navbar = props => {
             <div className={classes.toolbar}>
                 <Logo />
             </div>
-            <Divider />
             <List className={classes.list}>
                 {tabs.map((tab, index) => (
                     <NavLink
@@ -100,7 +99,10 @@ export const Navbar = props => {
                         variant="body2"
                         className={classes.tab}
                         to={tab.url}
-                        onClick={() => setValue(index)}>
+                        onClick={() => {
+                            setValue(index);
+                            handleDrawerToggle();
+                        }}>
                         <ListItem
                             button
                             key={'text'}

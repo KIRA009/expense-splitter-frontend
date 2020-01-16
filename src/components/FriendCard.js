@@ -39,11 +39,10 @@ export const FriendCard = props => {
                     {actions.includes('accept') ? (
                         <>
                             <Button
-                                className={classes.tabs}
                                 type="submit"
                                 variant="contained"
                                 style={{backgroundColor: primColors.light, color: secColors.dark}}
-                                onClick={() => others.acceptRequest({variables: {contact}})}>
+                                onClick={() => others.accept({variables: {contact}})}>
                                 {' '}
                                 Accept
                             </Button>
@@ -57,7 +56,7 @@ export const FriendCard = props => {
                             type="submit"
                             variant="contained"
                             style={{backgroundColor: secColors.dark, color: primColors.light}}
-                            onClick={() => others.deleteRequest({variables: {contact}})}>
+                            onClick={() => others.delete({variables: {contact, firstName: name}})}>
                             {' '}
                             Delete
                         </Button>
