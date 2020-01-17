@@ -16,7 +16,7 @@ const client = new ApolloClient({
             }
         });
     },
-    uri: 'http://localhost:8000/api/'
+    uri: process.env.REACT_APP_API_URL
 });
 
 ReactDOM.render(
