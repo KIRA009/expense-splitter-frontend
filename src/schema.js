@@ -36,6 +36,7 @@ export const getReceivedFriendRequestsQuery = gql`
             userReceived {
                 fromUser {
                     contact
+                    firstName
                 }
             }
         }
@@ -48,6 +49,7 @@ export const getSentFriendRequestsQuery = gql`
             userSent {
                 toUser {
                     contact
+                    firstName
                 }
             }
         }
@@ -88,6 +90,93 @@ export const getFriendsQuery = gql`
                     firstName
                 }
             }
+        }
+    }
+`;
+
+export const getGroupsQuery = gql`
+    query user {
+        user {
+            groupAdmin {
+                groupName
+                groupAdmin {
+                    contact
+                    firstName
+                }
+                groupMember {
+                    contact
+                    firstName
+                }
+            }
+            groupMember {
+                groupName
+                groupAdmin {
+                    contact
+                    firstName
+                }
+                groupMember {
+                    contact
+                    firstName
+                }
+            }
+        }
+    }
+`;
+
+export const getNotAddedMembers = gql`
+    query notAddedMembers($group_name: String!) {
+        notAddedMembers(groupName: $group_name) {
+            contact
+            firstName
+        }
+    }
+`;
+
+export const addMembersMutation = gql`
+    mutation addMembers($contacts: [String!], $group_name: String!) {
+        addMembers(contacts: $contacts, groupName: $group_name) {
+            ok
+            message
+            group {
+                groupName
+                groupAdmin {
+                    contact
+                    firstName
+                }
+                groupMember {
+                    contact
+                    firstName
+                }
+            }
+        }
+    }
+`;
+
+export const removeMembersMutation = gql`
+    mutation removeMembers($contacts: [String!], $group_name: String!) {
+        removeMembers(contacts: $contacts, groupName: $group_name) {
+            ok
+            message
+            group {
+                groupName
+                groupAdmin {
+                    contact
+                    firstName
+                }
+                groupMember {
+                    contact
+                    firstName
+                }
+            }
+        }
+    }
+`;
+
+export const createGroupMutation = gql`
+    mutation createGroup($contacts: [String!], $group_name: String!) {
+        createGroup(contacts: $contacts, groupName: $group_name) {
+            ok
+            message
         }
     }
 `;
